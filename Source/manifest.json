@@ -1,8 +1,8 @@
 {
-	"manifest_version": 1,
+	"manifest_version": 2,
 
 	"name": "Fahrenheit to Celsius",
-    "short_name": "Celsius",
+	"short_name": "Celsius",
 	"description": "Replaces 'Fahrenheit' degrees with 'Celsius' degrees.",
 	"author": "Phil Manijak",
 	"version": "1.0",
