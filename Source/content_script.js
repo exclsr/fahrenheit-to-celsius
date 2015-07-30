@@ -26,6 +26,9 @@ document.title = replaceText(document.title);
 	// });
 
 
+
+
+
 function walk(node)
 {
 	// I stole this function from here:
@@ -65,12 +68,54 @@ function replaceText(v)
 {
     //	"It's literally 122 degrees in NYC";
     //  "Topping the 90-degree mark"
-	var regex = new RegExp("(\\d+)(\\s*-?)degree(s?)", "g");
+	var degreeRegex = new RegExp("(\\d+)(\\s*-?)degree(s?)", "g");
 
-	v = v.replace(regex, function (match, degrees, hyphen, plural, offset, string) {
+	v = v.replace(degreeRegex, function (match, degrees, hyphen, plural, offset, string) {
 		var celsius = toCelsius(degrees);
 		return celsius + hyphen + "degree" + plural;
 	});
+
+    // "High temperatures of 80 or more" ...
+	var tempRegex = new RegExp("(temperatures[\\s*\\w]{0,3}\\s*)(\\d+)", "g");
+	v = v.replace(tempRegex, function (match, prefix, degrees, offset, string) {
+		var celsius = toCelsius(degrees);
+		return prefix + celsius;
+	});
+
+	// "upper 90s" ...
+	var modRegex = new RegExp("(upper\\s*)(\\d+)", "g");
+	v = v.replace(modRegex, function (match, prefix, degrees, offset, string) {
+		var celsius = toCelsius(degrees);
+		return prefix + celsius;
+	});
+
+	// TODO: 
+	// highs in the 90s, high 90s ...
+	// lows in the 60s, low 60s ....
+	// ranges: e.g. upper 90s to 100s
+	// mid 90s, middle 90s ...
+
+	// TODO: of (temp) !degrees
+	// Something like "high of 90 degrees" gets converted twice.
+	// var modRegex = new RegExp("(of\\s)(\\d+)\\s*(?!degrees)", "g");
+	// v = v.replace(modRegex, function (match, prefix, degrees, offset, string) {
+	// 	if (degrees > 300) {
+	// 		return match;
+	// 	}
+	// 	var celsius = toCelsius(degrees);
+	// 	console.log(match)
+	// 	console.log(prefix)
+	// 	console.log(degrees)
+	// 	console.log("String: " + string)
+	// 	return prefix + celsius;		
+	// });
+
+	// var modRegex = new RegExp("(upper\\s*)(\\d+)", "g");
+	// v = v.replace(modRegex, function (match, prefix, degrees, offset, string) {
+	// 	var celsius = toCelsius(degrees);
+	// 	return prefix + celsius;
+	// });
+
 
 	// TODO: Not sure if this is effective.
 	v = v.replace(new RegExp("(\\d+)°", "g"), function (match, degrees, offset, string) {
