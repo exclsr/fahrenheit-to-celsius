@@ -1,11 +1,11 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 1,
 
-	"name": "Millennials to Snake People",
-    "short_name": "Snake People",
-	"description": "Replaces the text 'Millennial' with 'Snake People'.",
-	"author": "Eric Bailey",
-	"version": "1.2",
+	"name": "Fahrenheit to Celsius",
+    "short_name": "Celsius",
+	"description": "Replaces 'Fahrenheit' degrees with 'Celsius' degrees.",
+	"author": "Phil Manijak",
+	"version": "1.0",
 
 	"icons": {
 		"16": "icon16.png",
